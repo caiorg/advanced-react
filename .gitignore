@@ -111,7 +111,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # Custom
-lib/bundle.js
+public/bundle.js
 coverage/
 
 # End of https://www.gitignore.io/api/node,macos,windows
