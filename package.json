@@ -8,15 +8,19 @@
   "scripts": {
     "dev": "NODE_PATH=./lib pm2 start lib/server.js --watch --interpreter babel-node",
     "webpack": "webpack -wd",
-    "build-webpack": "webpack -p",
     "test": "jest --watch",
-    "verify-tests": "jest --coverage"
+    "verify-tests": "jest --coverage",
+    "build-webpack": "webpack -p",
+    "build-node": "babel lib -d build --copy-files"
   },
   "babel": {
     "presets": [
       "react",
-      "env",
-      "stage-2"
+      ["env", { "target": { "node": "current" } } ]
+    ],
+    "plugins": [
+      "transform-class-properties",
+      "transform-object-rest-spread"
     ]
   },
   "devDependencies": {
