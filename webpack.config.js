@@ -7,15 +7,29 @@ const config = {
       path.resolve('./node_modules'),
     ]
   },
-  entry: ['babel-polyfill', './lib/renderers/dom.js'],
+  entry: {
+    bundle:['babel-polyfill', './lib/renderers/dom.js'],
+  },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: '[name].js',
   },
   module: {
     rules: [
       { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' }
     ]
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /node_modules/, // you may add "vendor.js" here if you want to
+          name: 'vendor',
+          chunks: 'initial',
+          enforce: true
+        }
+      }
+    }
   }
 };
 
