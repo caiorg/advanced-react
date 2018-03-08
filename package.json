@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "NODE_PATH=./lib pm2 start lib/server.js --watch --interpreter babel-node",
     "webpack": "webpack -wd",
-    "webpack:stats": "webpack --profile --json > stats.json",
+    "build-webpack": "webpack -p",
     "test": "jest --watch",
     "verify-tests": "jest --coverage"
   },
