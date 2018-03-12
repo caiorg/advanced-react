@@ -35,6 +35,12 @@ jobs:
         
       # run tests!
       - run: yarn test
+      
+      # build app
+      - run: yarn build-node
+      
+      # start server
+      - run: yarn start-prod
 deployment:
   staging:
     branch: master
