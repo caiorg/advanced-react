@@ -38,12 +38,9 @@ jobs:
       
       # build app
       - run: yarn build-node
-      
-      # start server
-      - run: yarn start-prod
-deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: advanced-react-staging
+  deployment:
+    staging:
+      branch: master
+      heroku:
+        appname: advanced-react-staging
 
