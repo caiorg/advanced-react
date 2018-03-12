@@ -51,8 +51,13 @@ jobs:
           fingerprints:
             - "35:75:7f:ac:66:9e:1d:06:a4:cb:9b:14:57:3f:0a:fe"
       - run:
+        name: Avoid hosts unknown for github
+        command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+        
+      - run:
           name: Run Setup Script
           command: bash .circleci/setup-heroku.sh
+          
       - run:
           name: Deploy Master to Heroku
           command: |  # this command is framework-dependent and may vary
