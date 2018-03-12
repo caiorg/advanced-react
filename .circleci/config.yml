@@ -47,7 +47,7 @@ jobs:
       # Heroku deployment
       - run:
           name: Run Setup Script
-          command: bash .circleci/setup-heroku.sh
+          command: bash .circleci/deploy_to_heroku.sh
       - run:
           name: Deploy Master to Heroku
           command: |  # this command is framework-dependent and may vary
