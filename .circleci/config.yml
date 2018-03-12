@@ -18,6 +18,11 @@ jobs:
 
     steps:
       - checkout
+      
+      # add key from CircleCI account based on fingerprint
+      - add_ssh_keys:
+          fingerprints:
+            - "35:75:7f:ac:66:9e:1d:06:a4:cb:9b:14:57:3f:0a:fe"
 
       # Download and cache dependencies
       - restore_cache:
@@ -38,9 +43,16 @@ jobs:
       
       # build app
       - run: yarn build-node
-  deployment:
-    staging:
-      branch: master
-      heroku:
-        appname: advanced-react-staging
+      
+      # Heroku deployment
+      - run:
+          name: Run Setup Script
+          command: bash .circleci/setup-heroku.sh
+      - run:
+          name: Deploy Master to Heroku
+          command: |  # this command is framework-dependent and may vary
+            heroku git:remote -a $HEROKU_APP_NAME
+            git push --force git@heroku.com:$HEROKU_APP_NAME.git HEAD:refs/heads/master
+            heroku run python manage.py deploy
+            heroku restart
 
